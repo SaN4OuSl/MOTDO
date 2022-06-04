@@ -1,0 +1,115 @@
+<form [formGroup]="utilService.userForm" (ngSubmit)="sendDataToCalculate()"
+      id="auth_form" xmlns="http://www.w3.org/1999/html">
+  <table class="table">
+    <thead>
+    <tr>
+      <th style="background-color: lightgray; width: 15%">Назва матеріалу/Назва товару</th>
+      <th>Шафи</th>
+      <th>Крісла</th>
+      <th>Ліжка</th>
+      <th>Дивани</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td style="background-color: lightblue">Дерево</td>
+      <td><input formControlName = "a00"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "a01"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "a02"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "a03"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+    </tr>
+    <tr>
+      <td style="background-color: lightblue">Тканина</td>
+      <td><input formControlName = "a10"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "a11"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "a12"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "a13"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+    </tr>
+    <tr>
+      <td style="background-color: lightblue">Людьські ресурси</td>
+      <td><input formControlName = "a20"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "a21"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "a22"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "a23"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+    </tr>
+    </tbody>
+  </table>
+  <br>
+  <div>
+    <table>
+      <td>Кількість деревини(м^3):</td>
+      <tr><input formControlName = "amount_wood"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></tr>
+      <td>Кількість тканини(м):</td>
+      <tr><input formControlName = "amount_cloth"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></tr>
+      <td>Кількість трудових годин:</td>
+      <tr><input formControlName = "amount_people_power"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></tr>
+    </table>
+    <table style="margin-left: 200px; margin-top: -143px">
+      <td>Ціна за шафу:</td>
+      <tr><input formControlName = "price_shaf" onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></tr>
+      <td>Ціна за крісло:</td>
+      <tr><input formControlName = "price_kris" onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></tr>
+      <td>Ціна за ліжко:</td>
+      <tr><input formControlName = "price_lig" onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></tr>
+      <td>Ціна за диван:</td>
+      <tr><input formControlName = "price_div" onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></tr>
+    </table>
+    <table style="margin-left: 400px; margin-top: -192px">
+      <td>Обмеження для шаф:</td>
+      <tr><select formControlName = "type_of_shaf">
+        <option value=">=">Більше</option>
+        <option value="<=">Менше</option>
+      </select></tr>
+      <tr><input formControlName = "amount_of_shaf" onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></tr>
+      <td>Обмеження для крісел:</td>
+      <tr> <select formControlName = "type_of_kris">
+        <option value=">=">Більше</option>
+        <option value="<=">Менше</option>
+      </select></tr>
+      <tr><input formControlName = "amount_of_kris" onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></tr>
+      <td>Обмеження для ліжок:</td>
+      <tr><select formControlName = "type_of_lig">
+        <option value=">=">Більше</option>
+        <option value="<=">Менше</option>
+      </select></tr>
+      <tr><input formControlName = "amount_of_lig" onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></tr>
+      <td>Обмеження для диванів:</td>
+      <tr><select formControlName = "type_of_div">
+        <option value=">=">Більше</option>
+        <option value="<=">Менше</option>
+      </select></tr>
+      <tr><input formControlName = "amount_of_div" onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></tr>
+    </table>
+  </div>
+  <select formControlName = "type_of_function">
+    <option value="-->min">Прибуток по мінімуму</option>
+    <option value="-->max">Прибуток по максимуму</option>
+  </select>
+  <p style="color: red">{{errorMessage}}</p>
+  <div *ngIf="money!= undefined">
+  <p style="color: blue">Прибуток: {{money}}</p>
+  <p style="color: blue">Шаф: {{amountOfShaf}}</p>
+  <p style="color: blue">Крісел: {{amountOfKris}}</p>
+  <p style="color: blue">Ліжок: {{amountOfLig}}</p>
+  <p style="color: blue">Диванів: {{amountOfDiv}}</p>
+  </div>
+  <button class="btn btn-primary" type="submit" style="margin-top: 10px">
+    Розрахувати
+  </button>
+</form>
+
