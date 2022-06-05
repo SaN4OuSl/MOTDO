@@ -5,7 +5,6 @@ import java.text.NumberFormat;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

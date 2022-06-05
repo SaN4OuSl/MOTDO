@@ -6,8 +6,6 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class UtilService {
 
-  list_of_items: number[][] = [];
-
   public userForm: FormGroup = new FormGroup({
 
     amount_wood: new FormControl('', Validators.required),
@@ -39,10 +37,6 @@ export class UtilService {
     amount_of_lig: new FormControl('', Validators.required),
     amount_of_div: new FormControl('', Validators.required),
   });
-
-  get getAddData() {
-    return this.userForm.controls;
-  }
 
   constructor() {
   }
