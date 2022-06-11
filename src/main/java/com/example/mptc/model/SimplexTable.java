@@ -3,7 +3,6 @@ package com.example.mptc.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import lombok.Data;
-import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
 
 @Data
 public class SimplexTable {
