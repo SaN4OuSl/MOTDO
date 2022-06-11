@@ -1,26 +1,33 @@
 package com.example.mptc.controller;
 
 import com.example.mptc.model.Answer;
+import com.example.mptc.model.Element;
 import com.example.mptc.request.SimplexRequest;
+import com.example.mptc.request.TransportRequest;
 import com.example.mptc.service.SimplexService;
+import com.example.mptc.service.TransportService;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("symplex")
 @CrossOrigin
 @AllArgsConstructor
-public class SimplexController {
+public class BasicController {
 
     public final SimplexService simplexService;
 
-    @PostMapping
+    public final TransportService transportService;
+    @PostMapping("/symplex")
     public Answer getTables(@RequestBody SimplexRequest simplexRequest) {
         return simplexService.calculate(simplexRequest);
     }
 
+    @PostMapping("/transport")
+    public List<List<Element>> getTransportAnswer(@RequestBody TransportRequest transportRequest) {
+        return transportService.calculate(transportRequest);
+    }
 }

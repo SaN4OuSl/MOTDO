@@ -1,0 +1,21 @@
+version: '3.3'
+
+services:
+
+  laptiev-app:
+    image: java-tomcat-app
+    container_name: laptiev-app
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+
+  laptiev-client:
+    container_name: laptiev-client
+    build: ./web
+    ports:
+      - "4200:4200"
+    depends_on:
+      - laptiev-app
+volumes:
+  h2-data:
