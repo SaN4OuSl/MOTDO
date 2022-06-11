@@ -4,6 +4,7 @@ import com.example.mptc.model.Answer;
 import com.example.mptc.model.Element;
 import com.example.mptc.request.SimplexRequest;
 import com.example.mptc.request.TransportRequest;
+import com.example.mptc.response.TransportResponse;
 import com.example.mptc.service.SimplexService;
 import com.example.mptc.service.TransportService;
 import java.util.List;
@@ -27,7 +28,7 @@ public class BasicController {
     }
 
     @PostMapping("/transport")
-    public List<List<Element>> getTransportAnswer(@RequestBody TransportRequest transportRequest) {
+    public TransportResponse getTransportAnswer(@RequestBody TransportRequest transportRequest) {
         return transportService.calculate(transportRequest);
     }
 }
