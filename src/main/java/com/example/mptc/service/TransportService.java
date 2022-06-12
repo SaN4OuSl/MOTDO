@@ -18,46 +18,46 @@ public class TransportService {
         int[] a = transportRequest.getA();  // запасы
         int[] b = transportRequest.getB();  // потребности
         int[][] l = transportRequest.getC();
-        x = new int[l.length+1][l[0].length+1];
+        x = new int[l.length + 1][l[0].length + 1];
         for (int i = 0; i < x.length; i++) {
             if (i >= 1) {
                 x[i][0] = a[i - 1];
-                if (x[i].length - 1 >= 0) System.arraycopy(l[i - 1], 0, x[i], 1, x[i].length - 1);
+                if (x[i].length - 1 >= 0) {
+                    System.arraycopy(l[i - 1], 0, x[i], 1, x[i].length - 1);
+                }
             } else {
                 x[0][0] = 0;
-                if (x[i].length - 1 >= 0) System.arraycopy(b, 0, x[0], 1, x[i].length - 1);
-            }
-        }
-        c = new int[x.length - 1][x.length];// инициация матрицы результатов
-        if(summaStocks(x) == summaRequest(x)) {
-            while ((summaStocks(x) != 0) &&
-                (summaRequest(x) != 0)) { // считаем пока есть запасы и потребности
-                findMin(x); // нахождение минимального элемента
-                if (x[index_min_i][0] < x[0][index_min_j]) { // потребности меньше запаса
-                    c[index_min_i - 1][index_min_j - 1] = x[index_min_i][0];
-                    x[index_min_i][index_min_j] = 0;
-                    x[0][index_min_j] -= x[index_min_i][0];
-                    x[index_min_i][0] = 0;
-                } else {
-                    c[index_min_i - 1][index_min_j - 1] = x[0][index_min_j];
-                    x[index_min_i][index_min_j] = 0;
-                    x[index_min_i][0] -= x[0][index_min_j];
-                    x[0][index_min_j] = 0;
+                if (x[i].length - 1 >= 0) {
+                    System.arraycopy(b, 0, x[0], 1, x[i].length - 1);
                 }
             }
-            int resultFunction = 0;
-            for (int i = 0; i < c.length; i++) {
-                for (int j = 0; j < c[i].length; j++) {
-                    resultFunction += c[i][j] * l[i][j];
-                }
-            }
-            TransportResponse transportResponse = new TransportResponse();
-            transportResponse.setResultFunction(resultFunction);
-            transportResponse.setC(c);
-            return transportResponse;
-        } else {
-            throw new RuntimeException("Incorrect data");
         }
+        c = new int[x.length - 1][x.length];// иницилизация матрицы результатов
+        while ((summaStocks(x) != 0) &&
+            (summaRequest(x) != 0)) { // считаем пока есть запасы и потребности
+            findMin(x); // нахождение минимального элемента
+            if (x[index_min_i][0] < x[0][index_min_j]) { // потребности меньше запаса
+                c[index_min_i - 1][index_min_j - 1] = x[index_min_i][0];
+                x[index_min_i][index_min_j] = 0;
+                x[0][index_min_j] -= x[index_min_i][0];
+                x[index_min_i][0] = 0;
+            } else {
+                c[index_min_i - 1][index_min_j - 1] = x[0][index_min_j];
+                x[index_min_i][index_min_j] = 0;
+                x[index_min_i][0] -= x[0][index_min_j];
+                x[0][index_min_j] = 0;
+            }
+        }
+        int resultFunction = 0;
+        for (int i = 0; i < c.length; i++) {
+            for (int j = 0; j < c[i].length; j++) {
+                resultFunction += c[i][j] * l[i][j];
+            }
+        }
+        TransportResponse transportResponse = new TransportResponse();
+        transportResponse.setResultFunction(resultFunction);
+        transportResponse.setC(c);
+        return transportResponse;
     }
 
 
