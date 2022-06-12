@@ -31,10 +31,13 @@ export class UserComponent implements OnInit {
   amountOfKris: number = 0;
   amountOfLig: number = 0;
   amountOfDiv: number = 0;
+  minCosts: number | undefined;
+  messageWithRecommendation: string = "";
   readonly shaf = 'x1'
   readonly kris = 'x2'
   readonly lig = 'x3'
   readonly div = 'x4'
+
   constructor(utilService: UtilService) {
     this.utilService = utilService;
   }
@@ -44,7 +47,7 @@ export class UserComponent implements OnInit {
   }
 
   async sendDataToCalculate() {
-    if(this.utilService.userForm.valid) {
+    if (this.utilService.userForm.valid) {
       this.errorMessage = "";
       let dataForm = this.utilService.userForm.value
       let costFunction = dataForm['price_shaf'] + this.shaf + "+" + dataForm['price_kris'] + this.kris
@@ -80,7 +83,7 @@ export class UserComponent implements OnInit {
           body: finalRequest
         }).then(r => r.json())
       console.log(result)
-      if(dataForm['type_of_function'] == '-->max') {
+      if (dataForm['type_of_function'] == '-->max') {
         this.money = Math.round(result.items['max F']);
       } else {
         this.money = Math.round(result.items['min F']);
@@ -104,7 +107,39 @@ export class UserComponent implements OnInit {
     }
   }
 
-  transportDataCalculate(){
-    console.log(this.utilService.transportForm);
+  async transportDataCalculate() {
+    if (this.utilService.transportForm.valid) {
+      let dataForm = this.utilService.transportForm.value;
+      let a = "\"a\": [" + dataForm['a1'] + ", " + dataForm['a2'] + ", " + dataForm['a3'] + "]";
+      let b = "\"b\": [" + dataForm['b1'] + ", " + dataForm['b2'] + ", " + dataForm['b3'] + ", " + dataForm['b4'] + "]";
+      let c = "\"c\": [[" + dataForm['a1b1'] + ", " + dataForm['a1b2'] + ", " + dataForm['a1b3'] + ", " + dataForm['a1b4'] + "]," +
+        "[" + dataForm['a2b1'] + ", " + dataForm['a2b2'] + ", " + dataForm['a2b3'] + ", " + dataForm['a2b4'] + "]," +
+        "[" + dataForm['a3b1'] + ", " + dataForm['a3b2'] + ", " + dataForm['a3b3'] + ", " + dataForm['a3b4'] + "]]";
+      let finalRequest = "{" + a + "," + b + "," + c + "}"
+      let result = await fetch(`${baseUrl}transport`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: finalRequest
+        }).then(r => r.json())
+      console.log(result)
+      let resultTable = result.c;
+      this.minCosts = result.resultFunction;
+      for (let i = 0; i < resultTable.length; i++) {
+        let n = i+1;
+        this.messageWithRecommendation += "З складу №" + n + " відправити у "
+        for (let j = 0; j < resultTable[i].length; j++) {
+          if (resultTable[i][j] > 0) {
+            let m = j+1;
+            this.messageWithRecommendation += "магазин №" + m + ": " + resultTable[i][j] + ", "
+          }
+          this.messageWithRecommendation += "\n"
+        }
+      }
+    } else {
+      this.messageWithRecommendation = 'Не всі поля заповнені'
+    }
   }
 }
