@@ -16,7 +16,7 @@ public class TransportService {
 
     public TransportResponse calculate(TransportRequest transportRequest) {
         int[] a = transportRequest.getA();  // запасы
-        int[] b = transportRequest.getB();  // заявки
+        int[] b = transportRequest.getB();  // потребности
         int[][] l = transportRequest.getC();
         x = new int[l.length+1][l[0].length+1];
         for (int i = 0; i < x.length; i++) {
@@ -31,9 +31,9 @@ public class TransportService {
         c = new int[x.length - 1][x.length];// инициация матрицы результатов
         if(summaStocks(x) == summaRequest(x)) {
             while ((summaStocks(x) != 0) &&
-                (summaRequest(x) != 0)) { // считаем пока есть запасы и заявки
+                (summaRequest(x) != 0)) { // считаем пока есть запасы и потребности
                 findMin(x); // нахождение минимального элемента
-                if (x[index_min_i][0] < x[0][index_min_j]) { // заявка меньше запаса
+                if (x[index_min_i][0] < x[0][index_min_j]) { // потребности меньше запаса
                     c[index_min_i - 1][index_min_j - 1] = x[index_min_i][0];
                     x[index_min_i][index_min_j] = 0;
                     x[0][index_min_j] -= x[index_min_i][0];
@@ -86,7 +86,7 @@ public class TransportService {
         return (temp);
     }
 
-    // сумма заявок
+    // сумма потребностей
     public static int summaRequest(int[][] mas) {
         int temp = 0;
         for (int j = 0; j < x[0].length; j++) {
