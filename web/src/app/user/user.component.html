@@ -113,3 +113,73 @@
   </button>
 </form>
 
+<form [formGroup]="utilService.transportForm" (ngSubmit)="transportDataCalculate()"
+      xmlns="http://www.w3.org/1999/html">
+  <table class="table">
+    <thead>
+    <tr>
+      <th style="background-color: lightgray; width: 15%"></th>
+      <th>B1</th>
+      <th>B2</th>
+      <th>B3</th>
+      <th>B4</th>
+      <th style="background-color: lightcoral">a</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>A1</td>
+      <td><input formControlName = "a1b1"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "a1b2"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "a1b3"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "a1b4"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "a1"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+    </tr>
+    <tr>
+      <td>A2</td>
+      <td><input formControlName = "a2b1"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "a2b2"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "a2b3"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "a2b4"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "a2"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+    </tr>
+    <tr>
+      <td>A3</td>
+      <td><input formControlName = "a3b1"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "a3b2"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "a3b3"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "a3b4"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "a3"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+    </tr>
+    <tr>
+      <td style="background-color: lightcoral">b</td>
+      <td><input formControlName = "b1"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "b2"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "b3"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName = "b4"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+    </tr>
+    </tbody>
+  </table>
+  <button class="btn btn-primary" type="submit" style="margin-top: 10px">
+    Розрахувати
+  </button>
+</form>

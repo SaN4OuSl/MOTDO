@@ -103,4 +103,8 @@ export class UserComponent implements OnInit {
       this.columnsToDisplay.pop();
     }
   }
+
+  transportDataCalculate(){
+    console.log(this.utilService.transportForm);
+  }
 }

@@ -1,13 +1,11 @@
 package com.example.mptc.controller;
 
 import com.example.mptc.model.Answer;
-import com.example.mptc.model.Element;
 import com.example.mptc.request.SimplexRequest;
 import com.example.mptc.request.TransportRequest;
 import com.example.mptc.response.TransportResponse;
 import com.example.mptc.service.SimplexService;
 import com.example.mptc.service.TransportService;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
