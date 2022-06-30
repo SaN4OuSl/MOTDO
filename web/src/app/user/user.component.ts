@@ -32,6 +32,7 @@ export class UserComponent implements OnInit {
   amountOfLig: number = 0;
   amountOfDiv: number = 0;
   minCosts: number | undefined;
+  minCostsForWork: number | undefined;
   messageWithRecommendation: string = "";
   readonly shaf = 'x1'
   readonly kris = 'x2'
@@ -128,16 +129,38 @@ export class UserComponent implements OnInit {
       let resultTable = result.c;
       this.minCosts = result.resultFunction;
       for (let i = 0; i < resultTable.length; i++) {
-        let n = i+1;
+        let n = i + 1;
         this.messageWithRecommendation += "З складу №" + n + " відправити у "
         for (let j = 0; j < resultTable[i].length; j++) {
           if (resultTable[i][j] > 0) {
-            let m = j+1;
+            let m = j + 1;
             this.messageWithRecommendation += "магазин №" + m + ": " + resultTable[i][j] + ", "
           }
           this.messageWithRecommendation += "\n"
         }
       }
+    } else {
+      this.messageWithRecommendation = 'Не всі поля заповнені'
+    }
+  }
+
+  async appointmentDataCalculate() {
+    if (this.utilService.appointmentForm.valid) {
+      let dataForm = this.utilService.appointmentForm.value;
+      let cost = "\"cost\": [[" + dataForm['a1b2'] + ", " + dataForm['a1b2'] + ", " + dataForm['a1b3'] + "],["
+        + dataForm['a2b1'] + ", " + dataForm['a2b2'] + ", " + dataForm['a2b3'] + "],["
+        + dataForm['a3b1'] + ", " + dataForm['a3b2'] + ", " + dataForm['a3b3'] + "]]";
+      let finalRequest = "{" + cost + "}"
+      let result = await fetch(`${baseUrl}appointment`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: finalRequest
+        }).then(r => r.json())
+      console.log(result)
+      this.minCostsForWork = result.resultFunction;
     } else {
       this.messageWithRecommendation = 'Не всі поля заповнені'
     }

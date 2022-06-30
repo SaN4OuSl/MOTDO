@@ -61,6 +61,19 @@ export class UtilService {
     b4: new FormControl('', Validators.required),
   });
 
+  public appointmentForm: FormGroup = new FormGroup({
+
+    a1b1: new FormControl('', Validators.required),
+    a1b2: new FormControl('', Validators.required),
+    a1b3: new FormControl('', Validators.required),
+    a2b1: new FormControl('', Validators.required),
+    a2b2: new FormControl('', Validators.required),
+    a2b3: new FormControl('', Validators.required),
+    a3b1: new FormControl('', Validators.required),
+    a3b2: new FormControl('', Validators.required),
+    a3b3: new FormControl('', Validators.required),
+  });
+
   constructor() {
   }
 }

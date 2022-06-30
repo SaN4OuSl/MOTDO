@@ -198,3 +198,53 @@
     Розрахувати
   </button>
 </form>
+
+<form [formGroup]="utilService.appointmentForm"
+      (ngSubmit)="appointmentDataCalculate()"
+      xmlns="http://www.w3.org/1999/html">
+  <table class="table">
+    <thead>
+    <tr>
+      <th style="background-color: lightgray; width: 15%"></th>
+      <th>1й робітник</th>
+      <th>2й робітник</th>
+      <th>3й робітник</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>1а робота</td>
+      <td><input formControlName="a1b1"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName="a1b2"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName="a1b3"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+    </tr>
+    <tr>
+      <td>2а робота</td>
+      <td><input formControlName="a2b1"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName="a2b2"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName="a2b3"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+    </tr>
+    <tr>
+      <td>3а робота</td>
+      <td><input formControlName="a3b1"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName="a3b2"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName="a3b3"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+    </tr>
+    </tbody>
+  </table>
+  <div *ngIf="minCostsForWork!= undefined">
+    <p style="color: blue">Сумарна мінімальна зарплата: {{minCostsForWork}}</p>
+  </div>
+  <button class="btn btn-primary" type="submit" style="margin-top: 10px">
+    Розрахувати
+  </button>
+</form>
