@@ -249,3 +249,48 @@
     Розрахувати
   </button>
 </form>
+
+<form [formGroup]="utilService.hierarchyForm"
+      (ngSubmit)="hiearchyDataCalculate()"
+      xmlns="http://www.w3.org/1999/html">
+  Наскільки якість навчання важливіша за зручність місця знаходження:
+  <input formControlName="coef"
+         onkeyup="this.value = this.value.replace(/[^\d.]/g,'');">
+  <table class="table">
+    <thead>
+    <tr>
+      <th style="background-color: lightgray; width: 15%"></th>
+      <th>1й університет</th>
+      <th>2й університет</th>
+      <th>3й університет</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Зручність місця знаходження(від 0 до 1)</td>
+      <td><input formControlName="a1b1"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName="a1b2"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName="a1b3"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+    </tr>
+    <tr>
+      <td>Якість навчання(від 0 до 1)</td>
+      <td><input formControlName="a2b1"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName="a2b2"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+      <td><input formControlName="a2b3"
+                 onkeyup="this.value = this.value.replace(/[^\d.]/g,'');"></td>
+    </tr>
+    </tbody>
+  </table>
+  <p>{{messageWithRecommendation}}</p>
+  <div *ngIf="coefsOfUnivers!= undefined">
+    <p style="color: blue; white-space: pre-line">Коефіціенти для кожного університету: {{'\n' + coefsOfUnivers}}</p>
+  </div>
+  <button class="btn btn-primary" type="submit" style="margin-top: 10px">
+    Розрахувати
+  </button>
+</form>

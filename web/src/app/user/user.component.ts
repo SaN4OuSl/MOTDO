@@ -34,6 +34,8 @@ export class UserComponent implements OnInit {
   minCosts: number | undefined;
   minCostsForWork: number | undefined;
   messageWithRecommendation: string = "";
+  coefsOfUnivers: string | undefined;
+
   readonly shaf = 'x1'
   readonly kris = 'x2'
   readonly lig = 'x3'
@@ -161,6 +163,41 @@ export class UserComponent implements OnInit {
         }).then(r => r.json())
       console.log(result)
       this.minCostsForWork = result.resultFunction;
+    } else {
+      this.messageWithRecommendation = 'Не всі поля заповнені'
+    }
+  }
+
+  async hiearchyDataCalculate() {
+    if (this.utilService.hierarchyForm.valid) {
+      let dataForm = this.utilService.hierarchyForm.value;
+      let criteria = "\"criteria\": [[" + dataForm['coef'] + "]]";
+      let variants = "\"variants\": [[" + dataForm['a1b2'] + ", " + dataForm['a1b2'] + ", " + dataForm['a1b3'] + "],["
+        + dataForm['a2b1'] + ", " + dataForm['a2b2'] + ", " + dataForm['a2b3'] + "]]";
+      let finalRequest = "{" + criteria + "," + variants + "}"
+      let result = await fetch(`${baseUrl}analysishierarchy`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: finalRequest
+        }).then(r => r.json())
+      console.log(result)
+      let i = 0;
+      let maxelement = 0;
+      let idOfElement = 0;
+      let finalMessage = "";
+      for (let res of result.results) {
+        i++;
+        if (res > maxelement) {
+          maxelement = res
+          idOfElement = i;
+        }
+        finalMessage += i + "й уніерситет: " + res + '\n'
+      }
+      finalMessage += "Краще всього поступати в " + idOfElement + "й університет"
+      this.coefsOfUnivers = finalMessage;
     } else {
       this.messageWithRecommendation = 'Не всі поля заповнені'
     }

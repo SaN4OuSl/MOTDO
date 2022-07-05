@@ -74,6 +74,16 @@ export class UtilService {
     a3b3: new FormControl('', Validators.required),
   });
 
+  public hierarchyForm: FormGroup = new FormGroup({
+    a1b1: new FormControl('', Validators.required),
+    a1b2: new FormControl('', Validators.required),
+    a1b3: new FormControl('', Validators.required),
+    a2b1: new FormControl('', Validators.required),
+    a2b2: new FormControl('', Validators.required),
+    a2b3: new FormControl('', Validators.required),
+    coef: new FormControl('', Validators.required),
+  });
+
   constructor() {
   }
 }
